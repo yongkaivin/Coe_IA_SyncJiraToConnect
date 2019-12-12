@@ -1,0 +1,276 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="GetJiraSubTaskStatus" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_strJiraProjectUrl" Type="InArgument(x:String)" />
+    <x:Property Name="out_dtSubTasks" Type="OutArgument(sd:DataTable)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>741.333333333333,2276.66666666667</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>GetJiraSubTaskStatus_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="22">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="16">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="GetJiraSubTaskStatus" sap:VirtualizedContainerService.HintSize="721.333333333333,2176.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser - Jira Issue Page" sap:VirtualizedContainerService.HintSize="679.333333333333,2084.66666666667" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="28845c17a1ba209bd9ee0caa1698e3fa" Selector="&lt;html app='chrome.exe' title='* - UiPath Jira' /&gt;">
+      <ui:BrowserScope.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="645.333333333333,1938.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:NavigateTo Browser="{x:Null}" DisplayName="Navigate To" sap:VirtualizedContainerService.HintSize="603.333333333333,58.6666666666667" sap2010:WorkflowViewState.IdRef="NavigateTo_1" Url="[in_strJiraProjectUrl]" />
+            <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser - Jira Project Page" sap:VirtualizedContainerService.HintSize="603.333333333333,1748" sap2010:WorkflowViewState.IdRef="BrowserScope_2" InformativeScreenshot="07508b63d63bc03f8ae4ad9abcd1bb58" Selector="&lt;html app='chrome.exe' title='* - UiPath Jira' /&gt;">
+              <ui:BrowserScope.Body>
+                <ActivityAction x:TypeArguments="x:Object">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="569.333333333333,1602" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Sequence DisplayName="Manual Scraping" sap:VirtualizedContainerService.HintSize="527.333333333333,1417.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:Boolean" Default="False" Name="isEndSubTaskStatus" />
+                        <Variable x:TypeArguments="x:Int32" Default="1" Name="intSubTaskIndex" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:BuildDataTable DataTable="[out_dtSubTasks]" DisplayName="Build SubTask Status Data Table - Output" sap:VirtualizedContainerService.HintSize="485.333333333333,58.6666666666667" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xD;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xD;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xD;&#xA;      &lt;xs:complexType&gt;&#xD;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xD;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xD;&#xA;            &lt;xs:complexType&gt;&#xD;&#xA;              &lt;xs:sequence&gt;&#xD;&#xA;                &lt;xs:element name=&quot;SubTask&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Status&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Key&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Url&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;              &lt;/xs:sequence&gt;&#xD;&#xA;            &lt;/xs:complexType&gt;&#xD;&#xA;          &lt;/xs:element&gt;&#xD;&#xA;        &lt;/xs:choice&gt;&#xD;&#xA;      &lt;/xs:complexType&gt;&#xD;&#xA;    &lt;/xs:element&gt;&#xD;&#xA;  &lt;/xs:schema&gt;&#xD;&#xA;&lt;/NewDataSet&gt;" />
+                      <While sap:VirtualizedContainerService.HintSize="485.333333333333,1226.66666666667" sap2010:WorkflowViewState.IdRef="While_1" Condition="[isEndSubTaskStatus = False]">
+                        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438.666666666667,1066" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                          <TryCatch.Try>
+                            <Sequence sap:VirtualizedContainerService.HintSize="376,828" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                              <Sequence.Variables>
+                                <Variable x:TypeArguments="x:String" Name="strSubTaskStatus" />
+                                <Variable x:TypeArguments="x:String" Name="strSubTask" />
+                                <Variable x:TypeArguments="x:String" Name="strSubTaskUrl" />
+                                <Variable x:TypeArguments="x:String" Name="strSubTaskKey" />
+                              </Sequence.Variables>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get SubTask Key" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="GetValue_1">
+                                <ui:GetValue.Target>
+                                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="c84c18bb36b69878a61cbbba487726b3" Selector="&lt;webctrl parentid='helpPanelContainer' tag='A' css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;a' idx='{{intSubTaskIndex}}' /&gt;" TimeoutMS="2000">
+                                    <ui:Target.WaitForReady>
+                                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                                    </ui:Target.WaitForReady>
+                                  </ui:Target>
+                                </ui:GetValue.Target>
+                                <ui:GetValue.Value>
+                                  <OutArgument x:TypeArguments="x:String">[strSubTaskKey]</OutArgument>
+                                </ui:GetValue.Value>
+                              </ui:GetValue>
+                              <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get SubTask Status" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="GetValue_2">
+                                <ui:GetValue.Target>
+                                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="3ddf81550041a17e27faedb80f59da71" Selector="&lt;webctrl parentid='helpPanelContainer' tag='SPAN' css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;button&amp;gt;span&amp;gt;span&amp;gt;span&amp;gt;div&amp;gt;span&amp;gt;span' idx='{{intSubTaskIndex}}' /&gt;" TimeoutMS="2000">
+                                    <ui:Target.WaitForReady>
+                                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                                    </ui:Target.WaitForReady>
+                                  </ui:Target>
+                                </ui:GetValue.Target>
+                                <ui:GetValue.Value>
+                                  <OutArgument x:TypeArguments="x:String">[strSubTaskStatus]</OutArgument>
+                                </ui:GetValue.Value>
+                              </ui:GetValue>
+                              <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get SubTask" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="GetValue_3">
+                                <ui:GetValue.Target>
+                                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="6ac5f4c17673ba3ba36a7aee45e8ba88" Selector="&lt;webctrl parentid='helpPanelContainer' tag='A' css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;a' idx='{{intSubTaskIndex}}' /&gt;&lt;nav up='1' /&gt;&lt;webctrl parentid='helpPanelContainer' tag='DIV' idx='6' /&gt;">
+                                    <ui:Target.TimeoutMS>
+                                      <InArgument x:TypeArguments="x:Int32" />
+                                    </ui:Target.TimeoutMS>
+                                    <ui:Target.WaitForReady>
+                                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                                    </ui:Target.WaitForReady>
+                                  </ui:Target>
+                                </ui:GetValue.Target>
+                                <ui:GetValue.Value>
+                                  <OutArgument x:TypeArguments="x:String">[strSubTask]</OutArgument>
+                                </ui:GetValue.Value>
+                              </ui:GetValue>
+                              <ui:GetAttribute ContinueOnError="{x:Null}" Attribute="href" DisplayName="Get Url" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="GetAttribute_1">
+                                <ui:GetAttribute.Result>
+                                  <OutArgument x:TypeArguments="x:String">[strSubTaskUrl]</OutArgument>
+                                </ui:GetAttribute.Result>
+                                <ui:GetAttribute.Target>
+                                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="bae147431590a0d806a2e39ea3f18916" Selector="&lt;webctrl parentid='helpPanelContainer' tag='A' css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;a' idx='{{intSubTaskIndex}}' /&gt;">
+                                    <ui:Target.TimeoutMS>
+                                      <InArgument x:TypeArguments="x:Int32" />
+                                    </ui:Target.TimeoutMS>
+                                    <ui:Target.WaitForReady>
+                                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                                    </ui:Target.WaitForReady>
+                                  </ui:Target>
+                                </ui:GetAttribute.Target>
+                              </ui:GetAttribute>
+                              <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{strSubTask, strSubTaskStatus, strSubTaskKey, strSubTaskUrl}]" DataTable="[out_dtSubTasks]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+                              <Assign sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_4">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:Int32">[intSubTaskIndex]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:Int32">[intSubTaskIndex + 1]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </Sequence>
+                          </TryCatch.Try>
+                          <TryCatch.Catches>
+                            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404.666666666667,22" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ActivityAction x:TypeArguments="s:Exception">
+                                <ActivityAction.Argument>
+                                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                </ActivityAction.Argument>
+                                <Assign DisplayName="Reach end of table, exit loop" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_3">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Boolean">[isEndSubTaskStatus]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </ActivityAction>
+                            </Catch>
+                          </TryCatch.Catches>
+                        </TryCatch>
+                      </While>
+                    </Sequence>
+                    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="527.333333333333,52.6666666666667" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+                      <ui:CommentOut.Body>
+                        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="242,161.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Sequence DisplayName="Data Scraping" sap:VirtualizedContainerService.HintSize="200,69.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="sd:DataTable" Default="[New System.Data.DataTable]" Name="ExtractDataTable" />
+                            </Sequence.Variables>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser - SubTask" sap:VirtualizedContainerService.HintSize="434,446" sap2010:WorkflowViewState.IdRef="BrowserScope_6" InformativeScreenshot="00d9a7232a49fd68a7cc403694be8546" Selector="&lt;html app='chrome.exe' title='*- UiPath Jira' /&gt;">
+                              <ui:BrowserScope.Body>
+                                <ActivityAction x:TypeArguments="x:Object">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,300" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:ExtractData DelayBetweenPagesMS="{x:Null}" NextLinkSelector="{x:Null}" ContinueOnError="True" DataTable="[ExtractDataTable]" DisplayName="Extract Structured Data - SubTask Status" ExtractMetadata="&lt;extract&gt;&lt;row exact='1'&gt;&lt;webctrl tag='div' class='sc-hEsumM kYciHN' idx='1'/&gt;&lt;webctrl tag='div' class='css-kyhvoj' idx='1'/&gt;&lt;webctrl tag='div' class='css-teprsg' idx='1'/&gt;&lt;webctrl tag='div' class='sc-iRbamj zmLaG' idx='1'/&gt;&lt;webctrl tag='div' class='sc-jlyJG diFYqY' idx='1'/&gt;&lt;webctrl tag='div' class='sc-jzJRlG ievzvu' idx='1'/&gt;&lt;webctrl tag='div' class='sc-Rmtcm gGFHun' idx='1'/&gt;&lt;webctrl tag='div' class='sc-Rmtcm gGFHun' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='sc-kKBQAD kLNxN' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='sc-adtsK bGbhBf' idx='1'/&gt;&lt;webctrl tag='div' class='sc-jWBwVP jCnKIq' idx='1'/&gt;&lt;webctrl tag='div' class='GridElement__Grid-sc-6y1aox-0 iEDZNb' idx='1'/&gt;&lt;webctrl tag='div' class='GridColumnElement__GridColumn-sc-57x38k-0 lnhCWP' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='sc-gQNndl jGYIxu' idx='1'/&gt;&lt;webctrl tag='div' class='sc-gFXMyG ddwGdc' idx='2'/&gt;&lt;webctrl tag='div' class='sc-Rmtcm gGFHun' idx='1'/&gt;&lt;webctrl tag='div' class='sc-kVyEtE XMrRd' idx='1'/&gt;&lt;webctrl tag='div' class='sc-beKmYL ffbvEB' idx='1'/&gt;&lt;webctrl tag='div' class='sc-gBIyv eagJCM'/&gt;&lt;webctrl tag='div' class='sc-eFTCDY hTIrmP' idx='1'/&gt;&lt;webctrl tag='div' class='sc-bRbqnn brHpYf sc-jCodtT bSMkbg' idx='1'/&gt;&lt;/row&gt;&lt;column exact='1' name='SubTask' attr='text'&gt;&lt;webctrl tag='div' class='sc-hEsumM kYciHN' idx='1'/&gt;&lt;webctrl tag='div' class='css-kyhvoj' idx='1'/&gt;&lt;webctrl tag='div' class='css-teprsg' idx='1'/&gt;&lt;webctrl tag='div' class='sc-iRbamj zmLaG' idx='1'/&gt;&lt;webctrl tag='div' class='sc-jlyJG diFYqY' idx='1'/&gt;&lt;webctrl tag='div' class='sc-jzJRlG ievzvu' idx='1'/&gt;&lt;webctrl tag='div' class='sc-Rmtcm gGFHun' idx='1'/&gt;&lt;webctrl tag='div' class='sc-Rmtcm gGFHun' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='sc-kKBQAD kLNxN' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='sc-adtsK bGbhBf' idx='1'/&gt;&lt;webctrl tag='div' class='sc-jWBwVP jCnKIq' idx='1'/&gt;&lt;webctrl tag='div' class='GridElement__Grid-sc-6y1aox-0 iEDZNb' idx='1'/&gt;&lt;webctrl tag='div' class='GridColumnElement__GridColumn-sc-57x38k-0 lnhCWP' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='sc-gQNndl jGYIxu' idx='1'/&gt;&lt;webctrl tag='div' class='sc-gFXMyG ddwGdc' idx='2'/&gt;&lt;webctrl tag='div' class='sc-Rmtcm gGFHun' idx='1'/&gt;&lt;webctrl tag='div' class='sc-kVyEtE XMrRd' idx='1'/&gt;&lt;webctrl tag='div' class='sc-beKmYL ffbvEB' idx='1'/&gt;&lt;webctrl tag='div' class='sc-gBIyv eagJCM'/&gt;&lt;webctrl tag='div' class='sc-eFTCDY hTIrmP' idx='1'/&gt;&lt;webctrl tag='div' class='sc-bRbqnn brHpYf sc-jCodtT bSMkbg' idx='1'/&gt;&lt;webctrl tag='div' class='sc-ewTrYR iWjCoK' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='sc-beROAQ ePGHZW' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Status' attr='text'&gt;&lt;webctrl tag='div' class='sc-hEsumM kYciHN' idx='1'/&gt;&lt;webctrl tag='div' class='css-kyhvoj' idx='1'/&gt;&lt;webctrl tag='div' class='css-teprsg' idx='1'/&gt;&lt;webctrl tag='div' class='sc-iRbamj zmLaG' idx='1'/&gt;&lt;webctrl tag='div' class='sc-jlyJG diFYqY' idx='1'/&gt;&lt;webctrl tag='div' class='sc-jzJRlG ievzvu' idx='1'/&gt;&lt;webctrl tag='div' class='sc-Rmtcm gGFHun' idx='1'/&gt;&lt;webctrl tag='div' class='sc-Rmtcm gGFHun' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='sc-kKBQAD kLNxN' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='sc-adtsK bGbhBf' idx='1'/&gt;&lt;webctrl tag='div' class='sc-jWBwVP jCnKIq' idx='1'/&gt;&lt;webctrl tag='div' class='GridElement__Grid-sc-6y1aox-0 iEDZNb' idx='1'/&gt;&lt;webctrl tag='div' class='GridColumnElement__GridColumn-sc-57x38k-0 lnhCWP' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='sc-gQNndl jGYIxu' idx='1'/&gt;&lt;webctrl tag='div' class='sc-gFXMyG ddwGdc' idx='2'/&gt;&lt;webctrl tag='div' class='sc-Rmtcm gGFHun' idx='1'/&gt;&lt;webctrl tag='div' class='sc-kVyEtE XMrRd' idx='1'/&gt;&lt;webctrl tag='div' class='sc-beKmYL ffbvEB' idx='1'/&gt;&lt;webctrl tag='div' class='sc-gBIyv eagJCM'/&gt;&lt;webctrl tag='div' class='sc-eFTCDY hTIrmP' idx='1'/&gt;&lt;webctrl tag='div' class='sc-bRbqnn brHpYf sc-jCodtT bSMkbg' idx='1'/&gt;&lt;webctrl tag='div' class='sc-OJyzl jBhOVn sc-jCodtT bSMkbg' idx='2'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='button' class='e1dqx2ri0 css-qgtn46' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Key' attr='text' name2='Url' attr2='href'&gt;&lt;webctrl tag='div' class='sc-hEsumM kYciHN' idx='1'/&gt;&lt;webctrl tag='div' class='css-kyhvoj' idx='1'/&gt;&lt;webctrl tag='div' class='css-teprsg' idx='1'/&gt;&lt;webctrl tag='div' class='sc-iRbamj zmLaG' idx='1'/&gt;&lt;webctrl tag='div' class='sc-jlyJG diFYqY' idx='1'/&gt;&lt;webctrl tag='div' class='sc-jzJRlG ievzvu' idx='1'/&gt;&lt;webctrl tag='div' class='sc-Rmtcm gGFHun' idx='1'/&gt;&lt;webctrl tag='div' class='sc-Rmtcm gGFHun' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='sc-kKBQAD kLNxN' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='sc-adtsK bGbhBf' idx='1'/&gt;&lt;webctrl tag='div' class='sc-jWBwVP jCnKIq' idx='1'/&gt;&lt;webctrl tag='div' class='GridElement__Grid-sc-6y1aox-0 iEDZNb' idx='1'/&gt;&lt;webctrl tag='div' class='GridColumnElement__GridColumn-sc-57x38k-0 lnhCWP' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='sc-gQNndl jGYIxu' idx='1'/&gt;&lt;webctrl tag='div' class='sc-gFXMyG ddwGdc' idx='2'/&gt;&lt;webctrl tag='div' class='sc-Rmtcm gGFHun' idx='1'/&gt;&lt;webctrl tag='div' class='sc-kVyEtE XMrRd' idx='1'/&gt;&lt;webctrl tag='div' class='sc-beKmYL ffbvEB' idx='1'/&gt;&lt;webctrl tag='div' class='sc-gBIyv eagJCM'/&gt;&lt;webctrl tag='div' class='sc-eFTCDY hTIrmP' idx='1'/&gt;&lt;webctrl tag='div' class='sc-bRbqnn brHpYf sc-jCodtT bSMkbg' idx='1'/&gt;&lt;webctrl tag='a' class='sc-bchHHi jgeNYA' idx='1'/&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="ExtractData_4" MaxNumberOfResults="0" SimulateClick="True">
+                                      <ui:ExtractData.Target>
+                                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="a68d0f3c72580dc20c435bdcdd88618f" Selector="&lt;webctrl id='helpPanelContainer' tag='DIV' /&gt;" WaitForReady="COMPLETE">
+                                          <ui:Target.TimeoutMS>
+                                            <InArgument x:TypeArguments="x:Int32" />
+                                          </ui:Target.TimeoutMS>
+                                        </ui:Target>
+                                      </ui:ExtractData.Target>
+                                    </ui:ExtractData>
+                                    <Assign sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_2">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="sd:DataTable">[out_dtSubTasks]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="sd:DataTable">[ExtractDataTable]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:BrowserScope.Body>
+                            </ui:BrowserScope>
+                          </Sequence>
+                        </Sequence>
+                      </ui:CommentOut.Body>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:CommentOut>
+                  </Sequence>
+                </ActivityAction>
+              </ui:BrowserScope.Body>
+            </ui:BrowserScope>
+          </Sequence>
+        </ActivityAction>
+      </ui:BrowserScope.Body>
+    </ui:BrowserScope>
+  </Sequence>
+</Activity>

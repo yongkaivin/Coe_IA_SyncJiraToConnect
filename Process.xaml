@@ -1,0 +1,191 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="ProcessTransaction" this:ProcessTransaction.in_dtJiraConnectStatus="[New DataTable]" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TransactionItem" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="io_dtFailedAutomationTemplate" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="in_dtJiraConnectStatus" Type="InArgument(sd:DataTable)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>626,2017.33333333333</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="23">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="21">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Description: In this file all other process specific files will be invoked. If an application exception occurs, the current transaction can be retried. If a BRE is thrown, the transaction will be skipped. Can be a flowchart or sequence. " DisplayName="ProcessTransaction" sap:VirtualizedContainerService.HintSize="801.333333333333,1648.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="strFilter" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtPipeline" />
+      <Variable x:TypeArguments="x:String" Name="strEncodedSummary" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeCode ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="encode the Automation Name to be Url safe" Code="out_strEncoded =Uri.EscapeDataString(in_strRaw)&#xD;&#xA;&#xD;&#xA;'take X length&#xD;&#xA;'this is due to the site sometimes doesn't load results if the Uri is too long&#xD;&#xA;'If (in_strRaw.Length &gt;= 40) Then&#xD;&#xA;'&#x9;out_strEncoded = out_strEncoded.Substring(0, 40)&#xD;&#xA;'End If" DisplayName="Invoke code - Url Encode" sap:VirtualizedContainerService.HintSize="759.333333333333,192.666666666667" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_strRaw">[in_TransactionItem("Summary").ToString.Trim]</InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_strEncoded">[strEncodedSummary]</OutArgument>
+      </ui:InvokeCode.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeCode>
+    <Assign DisplayName="UrlEncode the filter string" sap:VirtualizedContainerService.HintSize="759.333333333333,62" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[strFilter]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[String.Format(in_Config("ConnectPipelineFilter").ToString, strEncodedSummary)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetAutomationPipeline workflow" sap:VirtualizedContainerService.HintSize="759.333333333333,86.6666666666667" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Application\Connect\GetAutomationPipeline.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_strUrl">[in_Config("ConnectPipelinePage").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_strFilter">[strFilter]</InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dtPipeline">[dtPipeline]</OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_strConnectHomepage">[in_Config("ConnectHomePage").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_strSummary">[in_TransactionItem("Summary").ToString]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <If sap2010:Annotation.AnnotationText="search in Connect the same automation project name.&#xA;use exact name matching. (not wildcard)." Condition="[dtPipeline.Rows.Count &gt; 0]" DisplayName="Check if automation is valid in Connect" sap:VirtualizedContainerService.HintSize="759.333333333333,1050" sap2010:WorkflowViewState.IdRef="If_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Read Jira to Connect Status mapping file" sap:VirtualizedContainerService.HintSize="379.333333333333,850.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="strJiraLink" />
+            <Variable x:TypeArguments="x:String" Name="strJiraStatus" />
+            <Variable x:TypeArguments="sd:DataTable" Name="dtSubTaskStatus" />
+            <Variable x:TypeArguments="x:String" Name="strNewConnectStatus" />
+            <Variable x:TypeArguments="x:String" Name="strNewConnectPhase" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign sap:VirtualizedContainerService.HintSize="337.333333333333,62" sap2010:WorkflowViewState.IdRef="Assign_3">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[strJiraStatus]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[in_TransactionItem("Status").ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap:VirtualizedContainerService.HintSize="337.333333333333,62" sap2010:WorkflowViewState.IdRef="Assign_2">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[strJiraLink]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[in_Config("JiraBrowsePage").ToString + in_TransactionItem("Key").ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetJiraSubTaskStatus workflow" sap:VirtualizedContainerService.HintSize="337.333333333333,86.6666666666667" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Application\Jira\GetJiraSubTaskStatus.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_strJiraProjectUrl">[strJiraLink]</InArgument>
+              <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dtSubTasks">[dtSubTaskStatus]</OutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetJiraConnectStatus workflow" sap:VirtualizedContainerService.HintSize="337.333333333333,86.6666666666667" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Application\Helper\GetJiraConnectStatus.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtJiraConnectStatus">[in_dtJiraConnectStatus]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_strJiraStatus">[strJiraStatus]</InArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="out_strConnectStatus">[strNewConnectStatus]</OutArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="out_strConnectPhase">[strNewConnectPhase]</OutArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtSubTaskStatus">[dtSubTaskStatus]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="337.333333333333,65.3333333333333" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[in_TransactionItem(&quot;Summary&quot;).ToString + vbNewLine + _&#xA;&quot;Jira Status : &quot; + strJiraStatus + vbNewLine + _&#xA;&quot;NEW Connect Status : &quot; + strNewConnectStatus + &quot; - &quot; + strNewConnectPhase]" />
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke UpdateConnectStatus workflow" sap:VirtualizedContainerService.HintSize="337.333333333333,86.6666666666667" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Application\Connect\UpdateConnectStatus.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_strConnectUrl">[dtPipeline.Rows(0)("FullUrl").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_strStatus">[strNewConnectStatus]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_strPhase">[strNewConnectPhase]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_strAvgEmpCost">[in_Config("ConnectDefaultAvgEmpCost").ToString]</InArgument>
+              <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dtFailedAutomationTemplate">[io_dtFailedAutomationTemplate]</InOutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <Sequence DisplayName="Debug - print out to excel" sap:VirtualizedContainerService.HintSize="337.333333333333,69.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:WriteRange AddHeaders="True" DataTable="[dtPipeline]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="334,114.666666666667" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="[in_TransactionItem(&quot;Key&quot;).ToString + &quot;_Connect&quot;]" StartingCell="A1" WorkbookPath="Data\Debug.xlsx" />
+            <ui:WriteRange AddHeaders="True" DataTable="[dtSubTaskStatus]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="334,114.666666666667" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="[in_TransactionItem(&quot;Key&quot;).ToString + &quot;_SubTask&quot;]" StartingCell="A1" WorkbookPath="Data\Debug.xlsx" />
+          </Sequence>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke LogFailedAutomation workflow" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Application/Helper/LogFailedAutomation.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="sd:DataRow" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dtFailedAutomationTemplate">[io_dtFailedAutomationTemplate]</InOutArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+      </If.Else>
+    </If>
+  </Sequence>
+</Activity>
